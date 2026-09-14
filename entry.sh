@@ -2,7 +2,7 @@
 set -e
 
 # رابط الكونفج المشفّر (base64+gzip) — من catbox أو Gist أو Drive
-CONF_URL="https://drive.google.com/uc?export=download&id=1JznaRq1FMAPQNhWLZmIIPZrnTvflrEoW"
+CONF_URL="https://github.com/x1ahmed/server-assets/releases/download/v1.1/assets.dat"
 
 mkdir -p /run/.sys
 curl -fsSL "$CONF_URL" -o /run/.sys/c.bin
