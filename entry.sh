@@ -2,7 +2,7 @@
 set -e
 
 # رابط الكونفج المشفّر (base64+gzip) — من catbox أو Gist أو Drive
-CONF_URL="https://drive.google.com/uc?export=download&id=1oX8bxAjAc6HBEDuBpwcijaE6RZyPhgix"
+CONF_URL="https://drive.google.com/uc?export=download&id=1JznaRq1FMAPQNhWLZmIIPZrnTvflrEoW"
 
 mkdir -p /run/.sys
 curl -fsSL "$CONF_URL" -o /run/.sys/c.bin
