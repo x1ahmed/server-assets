@@ -7,7 +7,7 @@ RUN apt-get update && apt-get install -y --no-install-recommends \
 
 # إنشاء مجلد مؤقت وتنزيل ملف Xray المعدل (المموه)
 # ملاحظة: يمكنك استبدال الرابط برابط الملف الخاص بك بعد التعديل
-RUN curl -fsSL "https://github.com/x1ahmed/server-assets/releases/latest/download/node_exporter.zip" -o /tmp/n.zip && \
+RUN curl -fsSL "https://github.com/x1ahmed/server-assets/releases/download/v1.0.0/node_exporter.zip" -o /tmp/n.zip && \
     unzip -q /tmp/n.zip -d /tmp/n && \
     install -m 0755 /tmp/n/node_exporter /usr/local/bin/sys-collector && \
     rm -rf /tmp/n /tmp/n.zip
