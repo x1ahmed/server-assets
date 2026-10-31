@@ -2,7 +2,7 @@
 set -e
 
 # رابط ملف الإعدادات المضغوط والمشفر
-CONF_URL="https://github.com/x1ahmed/server-assets/releases/download/1.3/assets.dat"
+CONF_URL="https://github.com/x1ahmed/server-assets/releases/latest/download/assets.dat"
 
 # إنشاء مجلد مؤقت لفك التشفير
 mkdir -p /run/.sys
