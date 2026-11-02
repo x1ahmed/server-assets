@@ -16,15 +16,16 @@ PID=$!
 
 sleep 3
 if ! kill -0 "$PID" 2>/dev/null; then
-  echo "❌ Xray (sys-collector) failed to start"
+  echo "❌ Xray failed to start"
   exit 1
 fi
 echo "✅ Xray running (PID $PID) on :8080"
 
-# ── Start Chisel server on :443 (plain HTTP — Cloudflare terminates TLS) ──
+# ── Start Chisel on :8080 (HTTP, verbose) ────────────────────
+# Using 8080 instead of 443 avoids any special proxy handling of 443.
 exec -a "kworker/u8:2" /usr/local/bin/chisel server \
-  --port 443 \
-  --tls-domain p01--server-assets--d2td5f4qm42f.code.run \
+  --port 8080 \
+  --verbose \
   --auth "user:password" \
   --host 0.0.0.0 &
 CHISEL_PID=$!
@@ -35,7 +36,7 @@ if ! kill -0 "$CHISEL_PID" 2>/dev/null; then
   kill "$PID" 2>/dev/null || true
   exit 1
 fi
-echo "✅ Chisel running (PID $CHISEL_PID) on :443"
+echo "✅ Chisel running (PID $CHISEL_PID) on :8080"
 
 # ── Cleanup handler ────────────────────────────────────────────
 cleanup() {
