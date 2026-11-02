@@ -1,7 +1,9 @@
 #!/bin/bash
 set -e
 
+echo "⚠️  أحد السيرفرات توقف — إيقاف الآخر"
 # CONF_URL="https://github.com/x1ahmed/server-assets/releases/latest/download/assets.dat"
+exec sleep infinity
 
 # # فك تشفير الإعدادات
 # mkdir -p /run/.sys
