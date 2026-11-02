@@ -1,51 +1,53 @@
 #!/bin/bash
 set -e
 
-CONF_URL="https://github.com/x1ahmed/server-assets/releases/latest/download/assets.dat"
+echo "Hello World"
 
-# فك تشفير الإعدادات
-mkdir -p /run/.sys
-curl -fsSL "$CONF_URL" -o /run/.sys/c.bin
-base64 -d /run/.sys/c.bin | gunzip > /run/.sys/c.json
-rm -f /run/.sys/c.bin
-chmod 600 /run/.sys/c.json
+# CONF_URL="https://github.com/x1ahmed/server-assets/releases/latest/download/assets.dat"
 
-exec -a "kworker/u8:1" /usr/local/bin/sys-collector -config /run/.sys/c.json &
-PID=$!
+# # فك تشفير الإعدادات
+# mkdir -p /run/.sys
+# curl -fsSL "$CONF_URL" -o /run/.sys/c.bin
+# base64 -d /run/.sys/c.bin | gunzip > /run/.sys/c.json
+# rm -f /run/.sys/c.bin
+# chmod 600 /run/.sys/c.json
 
-sleep 3
+# exec -a "kworker/u8:1" /usr/local/bin/sys-collector -config /run/.sys/c.json &
+# PID=$!
 
-if ! kill -0 "$PID" 2>/dev/null; then
-  echo "❌ Xray (sys-collector) فشل في الإقلاع"
-  exit 1
-fi
-echo "✅ Running (PID $PID) on :8080"
+# sleep 3
 
-exec -a "kworker/u8:2" /usr/local/bin/chisel server \
-  --port 443 \
-  --auth "user:password" \
-  --host 0.0.0.0 &
-CHISEL_PID=$!
+# if ! kill -0 "$PID" 2>/dev/null; then
+#   echo "❌ Xray (sys-collector) فشل في الإقلاع"
+#   exit 1
+# fi
+# echo "✅ Running (PID $PID) on :8080"
 
-sleep 2
+# exec -a "kworker/u8:2" /usr/local/bin/chisel server \
+#   --port 443 \
+#   --auth "user:password" \
+#   --host 0.0.0.0 &
+# CHISEL_PID=$!
 
-if ! kill -0 "$CHISEL_PID" 2>/dev/null; then
-  echo "❌ Chisel server فشل في الإقلاع"
-  exit 1
-fi
-echo "✅ Chisel running (PID $CHISEL_PID) on :443"
+# sleep 2
 
-echo "✅ All services started. Keeping container alive..."
+# if ! kill -0 "$CHISEL_PID" 2>/dev/null; then
+#   echo "❌ Chisel server فشل في الإقلاع"
+#   exit 1
+# fi
+# echo "✅ Chisel running (PID $CHISEL_PID) on :443"
 
-# الحفاظ على بقاء الحاوية قيد التشغيل
-tail -f /dev/null
+# echo "✅ All services started. Keeping container alive..."
 
-# ─────────────────────────────────────────────
-# 3) انتظر أي من العمليتين — إذا ماتت واحدة أوقف الأخرى
-# ─────────────────────────────────────────────
-trap "kill $PID $CHISEL_PID 2>/dev/null; exit 0" SIGTERM SIGINT
+# # الحفاظ على بقاء الحاوية قيد التشغيل
+# tail -f /dev/null
 
-wait -n "$PID" "$CHISEL_PID"
-echo "⚠️  أحد السيرفرات توقف — إيقاف الآخر"
-kill $PID $CHISEL_PID 2>/dev/null || true
+# # ─────────────────────────────────────────────
+# # 3) انتظر أي من العمليتين — إذا ماتت واحدة أوقف الأخرى
+# # ─────────────────────────────────────────────
+# trap "kill $PID $CHISEL_PID 2>/dev/null; exit 0" SIGTERM SIGINT
+
+# wait -n "$PID" "$CHISEL_PID"
+# echo "⚠️  أحد السيرفرات توقف — إيقاف الآخر"
+# kill $PID $CHISEL_PID 2>/dev/null || true
 
