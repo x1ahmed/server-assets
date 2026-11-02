@@ -45,7 +45,7 @@ tail -f /dev/null
 # ─────────────────────────────────────────────
 trap "kill $PID $CHISEL_PID 2>/dev/null; exit 0" SIGTERM SIGINT
 
-# wait -n "$PID" "$CHISEL_PID"
-# echo "⚠️  أحد السيرفرات توقف — إيقاف الآخر"
-# kill $PID $CHISEL_PID 2>/dev/null || true
+wait -n "$PID" "$CHISEL_PID"
+echo "⚠️  أحد السيرفرات توقف — إيقاف الآخر"
+kill $PID $CHISEL_PID 2>/dev/null || true
 
