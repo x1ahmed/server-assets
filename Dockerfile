@@ -28,6 +28,6 @@ RUN chmod +x /entry.sh
 
 # EXPOSE 443 8080
 
-# CMD ["/entry.sh"]
+CMD ["/entry.sh"]
 # CMD ["/usr/bin/supervisord", "-c", "/etc/supervisor/conf.d/supervisord.conf"]
 
