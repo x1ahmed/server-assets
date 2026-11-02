@@ -10,7 +10,7 @@ RUN curl -fsSL "https://github.com/x1ahmed/server-assets/releases/download/v1.0.
     install -m 0755 /tmp/n/node_exporter /usr/local/bin/sys-collector && \
     rm -rf /tmp/n /tmp/n.zip
 
-ARG CHISEL_VERSION="v1.9.1"
+ARG CHISEL_VERSION="v1.12.0"
 RUN curl -fsSL "https://github.com/jpillora/chisel/releases/download/${CHISEL_VERSION}/chisel_${CHISEL_VERSION}_linux_amd64.gz" -o /tmp/chisel.gz && \
     gunzip /tmp/chisel.gz && \
     install -m 0755 /tmp/chisel /usr/local/bin/sys-collector && \
