@@ -1,4 +1,4 @@
-!/bin/bash
+#!/bin/bash
 set -e
 
 # CONF_URL="https://github.com/x1ahmed/server-assets/releases/latest/download/assets.dat"
