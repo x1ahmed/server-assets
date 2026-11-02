@@ -21,3 +21,7 @@ exec -a "kworker/u8:1" /usr/local/bin/sys-collector server \
   --port 443 \
   --auth "user:password" \
   --host 0.0.0.0
+
+echo "Try it!"
+
+wait
