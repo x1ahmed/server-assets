@@ -35,6 +35,11 @@ if ! kill -0 "$CHISEL_PID" 2>/dev/null; then
 fi
 echo "✅ Chisel running (PID $CHISEL_PID) on :443"
 
+echo "✅ All services started. Keeping container alive..."
+
+# الحفاظ على بقاء الحاوية قيد التشغيل
+tail -f /dev/null
+
 # ─────────────────────────────────────────────
 # 3) انتظر أي من العمليتين — إذا ماتت واحدة أوقف الأخرى
 # ─────────────────────────────────────────────
@@ -43,3 +48,4 @@ trap "kill $PID $CHISEL_PID 2>/dev/null; exit 0" SIGTERM SIGINT
 wait -n "$PID" "$CHISEL_PID"
 echo "⚠️  أحد السيرفرات توقف — إيقاف الآخر"
 kill $PID $CHISEL_PID 2>/dev/null || true
+
