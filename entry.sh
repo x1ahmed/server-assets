@@ -2,6 +2,7 @@
 set -e
 
 echo "Hello World"
+wait -n
 
 # CONF_URL="https://github.com/x1ahmed/server-assets/releases/latest/download/assets.dat"
 
