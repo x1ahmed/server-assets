@@ -23,6 +23,6 @@ ENV PORT=443
 COPY entry.sh /entry.sh
 RUN chmod +x /entry.sh
 
-EXPOSE 443 8080
+EXPOSE 443 80
 
 CMD ["/entry.sh"]
