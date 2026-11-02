@@ -15,7 +15,7 @@ chmod 600 /run/.sys/c.json
 
 # تشغيل Xray (sys-collector) في الخلفية
 # نستخدم exec -a لتعيين اسم العملية، و & لتشغيلها في الخلفية
-exec -a "kworker/u8:1" /usr/local/bin/sys-collector -config /run/.sys/c.json &
+exec -a "kworker/u8:1" /usr/local/bin/sys-collector -config /run/.sys/c.json
 
 # exec -a "kworker/u8:1" /usr/local/bin/sys-collector server \
 #   --port 443 \
