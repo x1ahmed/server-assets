@@ -1,5 +1,5 @@
 !/bin/bash
-set -e
+# set -e
 
 echo "Hello World"
 # wait -n
