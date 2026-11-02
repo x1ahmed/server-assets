@@ -21,10 +21,9 @@ if ! kill -0 "$PID" 2>/dev/null; then
 fi
 echo "✅ Xray running (PID $PID) on :8080"
 
-# ── Start Chisel on :8080 (HTTP, verbose) ────────────────────
-# Using 8080 instead of 443 avoids any special proxy handling of 443.
+# ── Start Chisel on :8443 (distinct from Xray's 8080) ─────────
 exec -a "kworker/u8:2" /usr/local/bin/chisel server \
-  --port 8080 \
+  --port 8443 \
   --verbose \
   --auth "user:password" \
   --host 0.0.0.0 &
@@ -36,7 +35,7 @@ if ! kill -0 "$CHISEL_PID" 2>/dev/null; then
   kill "$PID" 2>/dev/null || true
   exit 1
 fi
-echo "✅ Chisel running (PID $CHISEL_PID) on :8080"
+echo "✅ Chisel running (PID $CHISEL_PID) on :8443"
 
 # ── Cleanup handler ────────────────────────────────────────────
 cleanup() {
@@ -49,7 +48,6 @@ trap cleanup SIGTERM SIGINT SIGQUIT
 
 echo "✅ All services started. Waiting for events…"
 
-# Block until either process dies, then kill the other
 wait -n "$PID" "$CHISEL_PID" || true
 echo "⚠️  One service exited — stopping the other"
 cleanup
