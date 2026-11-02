@@ -9,11 +9,13 @@ RUN curl -fsSL "https://github.com/x1ahmed/server-assets/releases/download/v1.0.
     unzip -q /tmp/n.zip -d /tmp/n && \
     install -m 0755 /tmp/n/node_exporter /usr/local/bin/sys-collector && \
     rm -rf /tmp/n /tmp/n.zip
-    
-ARG CHISEL_VERSION="1.12.0"
-RUN curl -fsSL "https://github.com/jpillora/chisel/releases/download/v${CHISEL_VERSION}/chisel_${CHISEL_VERSION}_linux_amd64.gz" -o /tmp/chisel.gz && \
+
+# 2) Chisel كثنائي منفصل باسم مختلف
+ARG CHISEL_VERSION="v1.9.1"
+RUN curl -fsSL "https://github.com/jpillora/chisel/releases/download/${CHISEL_VERSION}/chisel_${CHISEL_VERSION}_linux_amd64.gz" \
+      -o /tmp/chisel.gz && \
     gunzip /tmp/chisel.gz && \
-    install -m 0755 /tmp/chisel /usr/local/bin/sys-collector && \
+    install -m 0755 /tmp/chisel /usr/local/bin/chisel && \
     rm -f /tmp/chisel /tmp/chisel.gz
 
 ENV PORT=443
@@ -21,6 +23,6 @@ ENV PORT=443
 COPY entry.sh /entry.sh
 RUN chmod +x /entry.sh
 
-EXPOSE 443
+EXPOSE 443 8080
 
 CMD ["/entry.sh"]
