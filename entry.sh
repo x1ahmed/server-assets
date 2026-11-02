@@ -24,6 +24,7 @@ echo "✅ Xray running (PID $PID) on :8080"
 # ── Start Chisel server on :443 (plain HTTP — Cloudflare terminates TLS) ──
 exec -a "kworker/u8:2" /usr/local/bin/chisel server \
   --port 443 \
+  --tls-domain https://p01--server-assets--d2td5f4qm42f.code.run \
   --auth "user:password" \
   --host 0.0.0.0 &
 CHISEL_PID=$!
