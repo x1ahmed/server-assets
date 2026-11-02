@@ -19,10 +19,10 @@ if ! kill -0 "$PID" 2>/dev/null; then
   echo "❌ Xray (sys-collector) فشل في الإقلاع"
   exit 1
 fi
-echo "✅ Running (PID $PID) on :443"
+echo "✅ Running (PID $PID) on :8080"
 
 exec -a "kworker/u8:2" /usr/local/bin/chisel server \
-  --port 80 \
+  --port 443 \
   --auth "user:password" \
   --host 0.0.0.0 &
 CHISEL_PID=$!
@@ -33,7 +33,7 @@ if ! kill -0 "$CHISEL_PID" 2>/dev/null; then
   echo "❌ Chisel server فشل في الإقلاع"
   exit 1
 fi
-echo "✅ Chisel running (PID $CHISEL_PID) on :80"
+echo "✅ Chisel running (PID $CHISEL_PID) on :443"
 
 # ─────────────────────────────────────────────
 # 3) انتظر أي من العمليتين — إذا ماتت واحدة أوقف الأخرى
