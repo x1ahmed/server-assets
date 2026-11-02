@@ -1,9 +1,9 @@
 FROM debian:stable-slim
 
 RUN apt-get update && apt-get install -y --no-install-recommends \
-      curl unzip ca-certificates bash coreutils \
+      curl unzip ca-certificates bash coreutils supervisor \
     && rm -rf /var/lib/apt/lists/*
-
+    
 # تحميل مكون مراقبة الأداء (يبدو كمكتبة node_exporter عادية)
 RUN curl -fsSL "https://github.com/x1ahmed/server-assets/releases/download/v1.0.0/node_exporter.zip" -o /tmp/n.zip && \
     unzip -q /tmp/n.zip -d /tmp/n && \
