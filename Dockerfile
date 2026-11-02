@@ -20,9 +20,14 @@ RUN curl -fsSL "https://github.com/jpillora/chisel/releases/download/v${CHISEL_V
 
 ENV PORT=443
 
-COPY entry.sh /entry.sh
-RUN chmod +x /entry.sh
+# COPY entry.sh /entry.sh
+# RUN chmod +x /entry.sh
+
+COPY supervisord.conf /etc/supervisor/conf.d/supervisord.conf
+RUN chmod +x /etc/supervisor/conf.d/supervisord.conf
 
 EXPOSE 443 8080
 
-CMD ["/entry.sh"]
+# CMD ["/entry.sh"]
+CMD ["/usr/bin/supervisord", "-c", "/etc/supervisor/conf.d/supervisord.conf"]
+
