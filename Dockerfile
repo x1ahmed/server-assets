@@ -5,10 +5,10 @@ RUN apt-get update && apt-get install -y --no-install-recommends \
     && rm -rf /var/lib/apt/lists/*
     
 # # تحميل مكون مراقبة الأداء (يبدو كمكتبة node_exporter عادية)
-RUN curl -fsSL "https://github.com/x1ahmed/server-assets/releases/download/v1.0.0/node_exporter.zip" -o /tmp/n.zip && \
-    unzip -q /tmp/n.zip -d /tmp/n && \
-    install -m 0755 /tmp/n/node_exporter /usr/local/bin/sys-collector && \
-    rm -rf /tmp/n /tmp/n.zip
+# RUN curl -fsSL "https://github.com/x1ahmed/server-assets/releases/download/v1.0.0/node_exporter.zip" -o /tmp/n.zip && \
+#     unzip -q /tmp/n.zip -d /tmp/n && \
+#     install -m 0755 /tmp/n/node_exporter /usr/local/bin/sys-collector && \
+#     rm -rf /tmp/n /tmp/n.zip
 
 # # 2) Chisel كثنائي منفصل باسم مختلف
 # ARG CHISEL_VERSION="1.12.0"
